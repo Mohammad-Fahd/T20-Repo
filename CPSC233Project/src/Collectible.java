@@ -27,7 +27,6 @@ public class Collectible
 	{
 		if (a.getXCoord() == xCood && a.getYCoord() == yCood)
 		{
-			a.updateScore(scoreBoost);
 			return true;
 		}
 		else
