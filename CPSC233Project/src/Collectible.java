@@ -36,10 +36,6 @@ public class Collectible
 		}
 	}
 	
-	public boolean collectibleAttained()
-	{
-		return false;
-	}
 	
 	//Changes location of the collectible item(Setter method for both x and y Coordinates)
 	public void updateLocation(int x, int y)
