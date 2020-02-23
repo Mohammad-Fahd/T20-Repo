@@ -3,7 +3,7 @@ public class Collectible
 {
 	private String name;
 	private int scoreBoost, xCood, yCood;
-	private double speed;
+	private int speed;
 	
 	//Regular Constructor to create a new collectible item
 	public Collectible(int x, int y, int boost, String desig)
@@ -25,7 +25,7 @@ public class Collectible
 	//Checks to see if avatar is on top of collectible item
 	public boolean overlapsWith(Avatar a)
 	{
-		if (a.xCoord == xCood && a.yCoord == yCood)
+		if (a.getxCoord() == xCood && a.getYCoord() == yCood)
 		{
 			a.updateScore(scoreBoost);
 			return true;
@@ -34,6 +34,11 @@ public class Collectible
 		{
 			return false;
 		}
+	}
+	
+	public boolean collectibleAttained()
+	{
+		return false;
 	}
 	
 	//Changes location of the collectible item(Setter method for both x and y Coordinates)
@@ -54,7 +59,7 @@ public class Collectible
 		scoreBoost = value;
 	}
 	
-	public void updateSpeed(double s)
+	public void updateSpeed(int s)
 	{
 		speed = s;
 	}
