@@ -175,7 +175,7 @@ public class AnimationApp {
 		System.out.print("Please enter a direction(U,D,L,R): ");
 		uInput = keyboard.nextLine();
 		
-		//this.board = processObstacleMove();
+		this.board = processObstacleMove();
 		this.board = processAvatarMove(uInput);
 		printCurrentState();
 	}
