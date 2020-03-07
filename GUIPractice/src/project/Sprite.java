@@ -9,15 +9,16 @@ import javafx.scene.shape.Rectangle;
 //base box that all moveables/items will build off of
 public class Sprite extends Rectangle
 {
-	private double moveLen = 50;
+	private double moveLen = 0.85;
+	private int scoreBoost;
 	
 	//Constructor
 	public Sprite(int x, int y, Color c)
 	{
 		setX(x);
 		setY(y);
-		setWidth(moveLen);
-		setHeight(moveLen);
+		setWidth(50);
+		setHeight(50);
 		setFill(c);
 	}
 	
@@ -65,6 +66,34 @@ public class Sprite extends Rectangle
 	public void getCoord()
 	{
 		System.out.println("("+getX()+","+getY()+")");
+	}
+	
+	public int getValue()
+	{
+		return scoreBoost;
+	}
+	
+	public void updateValue(int value)
+	{
+		scoreBoost = value;
+	}
+	
+	public boolean withinBounds(Avatar s)
+	{
+		if((s.getWidth()+getX() <= getWidth()+getX() && s.getWidth()+getX() >= getX())
+		&& (s.getY() == getY())) 
+		{
+			return true;
+		}
+		else if((s.getX() < getWidth()+getX() && s.getX() > getX())
+			 && (s.getY() == getY())) 
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
 	}
 	
 	public static void main(String[] args)
