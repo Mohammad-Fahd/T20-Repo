@@ -78,22 +78,25 @@ public class Sprite extends Rectangle
 		scoreBoost = value;
 	}
 	
-	public boolean withinBounds(Avatar s)
+	public boolean withinBounds(Avatar a)
 	{
-		if((s.getWidth()+getX() <= getWidth()+getX() && s.getWidth()+getX() >= getX())
-		&& (s.getY() == getY())) 
+		boolean flag = false;
+		if(((a.getWidth()+a.getX()) <= (this.getWidth()+this.getX()) && (a.getWidth()+a.getX()) >= this.getX())) 
 		{
-			return true;
+			if(a.getY() == getY())
+			{
+				flag = true;
+			}
 		}
-		else if((s.getX() < getWidth()+getX() && s.getX() > getX())
-			 && (s.getY() == getY())) 
+		else if(((a.getX() <= this.getWidth()+this.getX()) && a.getX() >= this.getX()))
 		{
-			return true;
+			if((a.getY() == getY()))
+			{
+				flag = true;
+			}
+			
 		}
-		else 
-		{
-			return false;
-		}
+		return flag;
 	}
 	
 	public static void main(String[] args)
