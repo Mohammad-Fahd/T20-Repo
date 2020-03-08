@@ -81,21 +81,22 @@ public class Sprite extends Rectangle
 	public boolean withinBounds(Avatar a)
 	{
 		boolean flag = false;
-		if(((a.getWidth()+a.getX()) <= (this.getWidth()+this.getX()) && (a.getWidth()+a.getX()) >= this.getX())) 
+		if((a.getX() < this.getWidth()+this.getX() && a.getWidth()+a.getX() >= this.getWidth()+this.getX())
+		|| (a.getX() < this.getX() && a.getWidth()+a.getX() >= this.getX())) 
 		{
 			if(a.getY() == getY())
 			{
 				flag = true;
 			}
 		}
-		else if(((a.getX() <= this.getWidth()+this.getX()) && a.getX() >= this.getX()))
+		/*else if(((a.getX() < this.getWidth()+this.getX()) && a.getX() > this.getX()))
 		{
 			if((a.getY() == getY()))
 			{
 				flag = true;
 			}
 			
-		}
+		}*/
 		return flag;
 	}
 	
