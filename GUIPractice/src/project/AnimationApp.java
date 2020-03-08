@@ -46,8 +46,19 @@ public class AnimationApp extends Application {
                             public void handle(ActionEvent event)
                             {
                                 avatar.collision(objects,scene);
-                                for (Sprite i : objects) {
-                                    i.Interaction(avatar, scene);
+                                for(Sprite i : objects)
+                                {
+                                	if(i instanceof Logs)
+                                	{
+                                		if(((Logs)i).getLR() < 0)
+                                		{
+                                			i.moveL(scene);
+                                		}
+                                		else
+                                		{
+                                			i.moveR(scene);
+                                		}
+                                	}
                                 }
                                 //avatar.updatePos();
                             }

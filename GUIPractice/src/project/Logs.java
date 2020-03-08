@@ -52,5 +52,10 @@ public class Logs extends Obstacle {
             }
         }
     }
+    
+    public int getLR()
+    {
+    	return LR;
+    }
    
 }
