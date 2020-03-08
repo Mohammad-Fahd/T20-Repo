@@ -23,8 +23,8 @@ public class Avatar extends Rectangle {
         System.out.println(getX());
         System.out.println(getY());
         setFill(Color.BLACK);
-        setWidth(moveLen);
-        setHeight(moveLen);
+        setWidth(50);
+        setHeight(50);
         this.score = 0;
     }
    
@@ -133,29 +133,42 @@ public class Avatar extends Rectangle {
 		}
 	}
     
-    public void collision(ArrayList<Sprite> a)
+    public void collision(ArrayList<Sprite> a,Scene cScene)
     {
     	for(Sprite s:a)
         {
         	if(s.withinBounds(this))
         	{
-        		if(s instanceof Obstacle)
+        		if(s instanceof Logs)
+        		{
+        			s.Interaction(this,cScene);
+        		}
+        		else if(s instanceof Obstacle)
         		{
         			resetPos();
-        			System.out.println("Ahh shit");
         			updateHealth(getHealth()-1);
         		}
         		if(s instanceof Collectible)
         		{
         			Collectible c = new Collectible((Collectible) s);
         			updateScore(getScore()+c.getValue());
-        			s.setFill(Color.WHITE);
+        			s.setFill(Color.rgb(200, 200, 200, 0.0));
         			s.updateValue(0);
         			if(c.getName() == 4)
         			{
-        				System.out.println("haha");
         				this.resetPos();
-        				((Collectible) s).updateName(1);
+        				for(Sprite spr: a)
+        				{
+        					if(spr instanceof Collectible)
+        					{
+        						if(((Collectible)spr).getName() == 1)
+        						{
+        							spr.setFill(Color.PURPLE);
+        							spr.updateValue(300);
+        						}
+        					}
+        				}
+        				((Collectible) s).updateName(2);
         				
         			}
         				

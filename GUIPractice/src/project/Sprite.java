@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 //base box that all moveables/items will build off of
-public class Sprite extends Rectangle
+abstract class Sprite extends Rectangle
 {
 	private double moveLen = 0.85;
 	private int scoreBoost;
@@ -93,16 +93,8 @@ public class Sprite extends Rectangle
 		return flag;
 	}
 	
-	public static void main(String[] args)
+	void Interaction(Avatar a, Scene cScene)
 	{
-		Sprite s = new Sprite(100,100,Color.BLACK);
-		Pane root = new Pane();
-        root.setPrefSize(550, 750);
-		Scene c = new Scene(root, 550, 750);
-		System.out.println(c.getHeight()+","+c.getWidth());
-		s.getCoord();
-		s.moveR(c);
-		s.getCoord();
 		
 	}
 

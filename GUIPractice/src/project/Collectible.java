@@ -17,6 +17,10 @@ public class Collectible extends Sprite
 		super(x,y,Color.PURPLE);
 		scoreBoost = boost;
 		name = desig;
+		if(name == 4)
+		{
+			setFill(Color.GOLD);
+		}
 	}
 	
 	//Copy constructor to inherit the properties of a pre-existing Collectible object
@@ -104,6 +108,11 @@ public class Collectible extends Sprite
 		{
 			yCood -= speed;
 		}
+		
+	}
+	
+	void Interaction(Avatar a, Scene cScene)
+	{
 		
 	}
 }
