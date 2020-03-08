@@ -156,6 +156,7 @@ public class Avatar extends Rectangle {
         				System.out.println("haha");
         				this.resetPos();
         				((Collectible) s).updateName(1);
+        				
         			}
         				
         		
