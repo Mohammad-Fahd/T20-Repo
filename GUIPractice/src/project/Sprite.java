@@ -38,6 +38,7 @@ abstract class Sprite extends Rectangle
 		setX(getX()+moveLen);
 	}
 	
+	
 	//Moves the object left
 	public void moveL(Scene s)
 	{
