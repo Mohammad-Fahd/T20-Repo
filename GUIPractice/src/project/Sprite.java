@@ -36,20 +36,12 @@ abstract class Sprite extends Rectangle
 	public void moveR(Scene s)
 	{
 		setX(getX()+moveLen);
-		if(getX() > s.getWidth())
-		{
-			setX(0);
-		}
 	}
 	
 	//Moves the object left
 	public void moveL(Scene s)
 	{
 		setX(getX()-moveLen);
-		if(getX() < 0)
-		{
-			setX(s.getWidth());
-		}
 	}
 	
 	//Setters/Getters (x/y already have them as per Rectangle class)
@@ -82,7 +74,8 @@ abstract class Sprite extends Rectangle
 	{
 		boolean flag = false;
 		if((a.getX() < this.getWidth()+this.getX() && a.getWidth()+a.getX() >= this.getWidth()+this.getX())
-		|| (a.getX() < this.getX() && a.getWidth()+a.getX() > this.getX())) 
+		||((a.getX() < this.getX() && a.getWidth()+a.getX() > this.getX())) 
+		|| (a.getX() > this.getX() && a.getWidth()+a.getX() < this.getWidth()+this.getX()))	
 		{
 			if(a.getY() == getY())
 			{
@@ -91,6 +84,16 @@ abstract class Sprite extends Rectangle
 		}
 
 		return flag;
+	}
+	
+	public double getCentreX()
+	{
+		return getX() + (getWidth()/2);
+	}
+	
+	public double getCentreY()
+	{
+		return getY() - (getHeight()/2); 
 	}
 	
 	void Interaction(Avatar a, Scene cScene)
