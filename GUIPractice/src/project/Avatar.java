@@ -111,11 +111,12 @@ public class Avatar extends Rectangle {
     }
    
     //Resets position of the frog
-    public Avatar resetPos() {
-        final int originX = 5;
-        final int originY = 14;
+    public void resetPos() {
+        final int originX = 350;
+        final int originY = 400;
         int cScore = this.score;
-        return(new Avatar(originX, originY, cScore));
+        this.setX(originX);
+        this.setY(originY);
         
         
     }
@@ -138,9 +139,10 @@ public class Avatar extends Rectangle {
         {
         	if(s.withinBounds(this))
         	{
-        		if(s instanceof Object)
+        		if(s instanceof Obstacle)
         		{
         			resetPos();
+        			System.out.println("Ahh shit");
         			updateHealth(getHealth()-1);
         		}
         		if(s instanceof Collectible)
@@ -151,7 +153,9 @@ public class Avatar extends Rectangle {
         			s.updateValue(0);
         			if(c.getName() == 4)
         			{
-        				resetPos();
+        				System.out.println("haha");
+        				this.resetPos();
+        				((Collectible) s).updateName(1);
         			}
         				
         		
