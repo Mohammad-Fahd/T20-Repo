@@ -26,15 +26,15 @@ public class Logs extends Obstacle {
      * Move alongside log while within bounds.
      */
     public void Interaction(Avatar a, Scene cScene) {
-        if (super.withinBounds(a)) {
-            super.move(super.getDirection(), cScene);
-            if (super.getDirection() == "L") {
+        if (super.withinBounds(a)) 
+        {
+            if (super.getDirection() == "L") 
+            {
                 a.setX(a.getX()-super.getMoveLen());
-            } else {
+            } else 
+            {
                 a.setX(a.getX()+super.getMoveLen());
             }
-        } else {
-            super.move(super.getDirection(), cScene);
         }
         resetLog();
     }

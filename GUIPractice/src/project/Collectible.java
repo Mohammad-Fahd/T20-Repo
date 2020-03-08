@@ -19,7 +19,7 @@ public class Collectible extends Sprite
 		name = desig;
 		if(name == 4)
 		{
-			setFill(Color.GOLD);
+			setFill(Color.RED);
 		}
 	}
 	

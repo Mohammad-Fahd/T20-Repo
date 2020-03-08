@@ -152,7 +152,10 @@ public class Avatar extends Rectangle {
         		{
         			Collectible c = new Collectible((Collectible) s);
         			updateScore(getScore()+c.getValue());
-        			s.setFill(Color.rgb(200, 200, 200, 0.0));
+        			if(c.getName() != 2)
+        			{
+        				s.setFill(Color.rgb(200, 200, 200, 0.0));
+        			}
         			s.updateValue(0);
         			if(c.getName() == 4)
         			{
@@ -168,6 +171,7 @@ public class Avatar extends Rectangle {
         						}
         					}
         				}
+        				s.setFill(Color.DARKGREEN);
         				((Collectible) s).updateName(2);
         				
         			}
