@@ -1,7 +1,7 @@
 package project;
-
+ 
 import java.util.ArrayList;
-
+ 
 import java.util.Arrays;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -15,20 +15,29 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
  
 public class AnimationApp extends Application {
+    ArrayList<Sprite> objects = new ArrayList<Sprite>();
+    final int boardX = 550;
+    final int boardY = 750;
+   
+   
     @Override
     public void start(Stage primaryStage) {
         try {
             Pane root = new Pane();
-            root.setPrefSize(550, 450);
+            root.setPrefSize(550, 750);
             Avatar avatar = new Avatar();
-            Collectible collectible = new Collectible(250,200,300,1);
-            ArrayList<Sprite> objects = new ArrayList<Sprite>();
-            objects.add(collectible);         
-           
-            root.getChildren().add(collectible);
-            root.getChildren().add(avatar);
-            Scene scene = new Scene(root,550,450);
             
+            Collectible collectible = new Collectible(250,200,300,1);
+            createObstacles();
+            objects.add(collectible);
+            //root.getChildren().add(collectible);
+            for (Sprite i: objects) {
+                root.getChildren().add(i);
+            }
+            
+            root.getChildren().add(avatar);
+            Scene scene = new Scene(root,550,750);
+           
             Timeline timeline1 = new Timeline(
                     new KeyFrame(Duration.millis(17),
                            new EventHandler <ActionEvent>()
@@ -36,7 +45,11 @@ public class AnimationApp extends Application {
                             @Override
                             public void handle(ActionEvent event)
                             {
-	                            avatar.collision(objects);
+                                avatar.collision(objects,scene);
+                                for (Sprite i : objects) {
+                                    i.Interaction(avatar, scene);
+                                }
+                                //avatar.updatePos();
                             }
                            }
                     )
@@ -66,6 +79,14 @@ public class AnimationApp extends Application {
     public AnimationApp() {
     }
    
+    private boolean switchLR(boolean LR) {
+        if (LR) {
+            return(false);
+        } else {
+            return(true);
+        }
+    }
+   
     //Prints out board as it is
     private void printCurrentState()
     {
@@ -78,6 +99,30 @@ public class AnimationApp extends Application {
        
     }
     */
+   private void createObstacles() {
+       boolean LeftRight = true;
+       String Left = "L";
+       String Right = "R";
+       //Y = 0, 50, 650, 700, 350 -- EMPTY
+       //Y = 100, 150, 200, 250, 300 -- LOGS
+       //Y = 400, 450, 500, 550, 600 -- VEHICLES
+       //0, 250, 500 R500
+       for(int i = 0; i < boardY+50; i += 50) {
+           if (i > 50 && i < 350) {
+               for(int ix = 0; ix < boardX+50; ix += 50) {
+                   if (ix == 0 || ix == 250 || ix == 500) {
+                       if (LeftRight) {
+                           objects.add(new Logs(ix, i, Left));
+                       } else {
+                           objects.add(new Logs(ix, i, Right));
+                       }
+                    }
+                   
+                }
+               LeftRight = switchLR(LeftRight);
+           }
+       }
+   }
    
     /*
     private int[][] processObstacleMove() {
@@ -101,19 +146,7 @@ public class AnimationApp extends Application {
    
     //Not final main
     public static void main(String[] args) {
-        boolean run = true;
-       
-        //Also launches Empty Constructor.
-        //Priority --> Empty Constructor --> 'Start'
         launch(args);
        
-        //This applies to collectible one (the frog (0) collectible that moves with the frog)
-       
-        /*
-        Start.printCurrentState();
-        while(run) {
-            Start.initialize();
-        }
-        */
     }
 }
