@@ -1,3 +1,4 @@
+package project;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
  
@@ -6,7 +7,8 @@ public class Logs extends Obstacle {
     private static Color color = Color.BROWN;
     private static int size = 3;
     private int LR;
-   
+    
+    //Constructor(Determines movement direction of Log on creation)
     public Logs (int startingX, int startingY, String direction) {
         super(startingX, startingY, Color.BROWN, direction, size);
         if (direction.equals("L")) {
@@ -38,6 +40,7 @@ public class Logs extends Obstacle {
         resetLog();
     }
    
+    //When log reaches the end of the screen, respawns on the other side
     public void resetLog() {
         String cDirect = super.getDirection();
         if (cDirect.equals("R")) {

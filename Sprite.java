@@ -1,4 +1,4 @@
-
+package project;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -70,6 +70,8 @@ abstract class Sprite extends Rectangle
 		scoreBoost = value;
 	}
 	
+	//Checks to see if top-left or top-right corner of avatar
+	//is within the sprite
 	public boolean withinBounds(Avatar a)
 	{
 		boolean flag = false;
@@ -86,6 +88,7 @@ abstract class Sprite extends Rectangle
 		return flag;
 	}
 	
+	//Used by Obstacles and Logs
 	void Interaction(Avatar a, Scene cScene)
 	{
 		

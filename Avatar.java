@@ -1,3 +1,4 @@
+package project;
 import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -29,27 +30,30 @@ public class Avatar extends Rectangle {
         this.score = 0;
     }
    
+    //Constructor
     public Avatar(int xCoord, int yCoord, int cScore) {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
         this.score = cScore;
     }
-   
+    //Copy Constructor
     public Avatar(Avatar toCopy) {
         this.xCoord = toCopy.getXCoord();
         this.yCoord = toCopy.getYCoord();
         this.score = toCopy.getScore();
     }
-   
+    
+   //Detects key press and performs the necessary action
     public void setMovement(Scene cScene) {
         cScene.setOnKeyPressed(keyPressed);
     }
    
+    //Prints out the coordinates of the avatar (for bug testing)
     public void updatePos() {
         System.out.println(getX());
         System.out.println(getY());
     }
-   
+    //Called by setMovement. Detects key press and performs corresponding action
     private EventHandler<KeyEvent> keyPressed = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -122,39 +126,29 @@ public class Avatar extends Rectangle {
         
     }
     
-    public boolean overlapsWith(Sprite s)
-	{
-		if (s.getX() == getX() && s.getY() == getY())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
     
+    //Checks to see if the avatar is colliding with a collectible, then performs tasks 
+    //corresponding to the type of collectible
     public void collision(ArrayList<Sprite> a,Scene cScene)
     {
     	for(Sprite s:a)
         {
         	if(s.withinBounds(this))
         	{
-        		if(s instanceof Logs)
-        		{
-        			
-        		}
-        		else if(s instanceof Obstacle)
-        		{
-        			resetPos();
-        			updateHealth(getHealth()-1);
-        		}
         		if(s instanceof Collectible)
         		{
         			Collectible c = new Collectible((Collectible) s);
         			updateScore(getScore()+c.getValue());
         			s.setFill(Color.rgb(200, 200, 200, 0.0));
         			s.updateValue(0);
+        			if(((Collectible) s).getName() != 0)
+        			{
+        				System.out.println("Score:" + getScore());
+        			}
+        			if(((Collectible) s).getName() != 4 && ((Collectible)s).getName() != 2)
+        			{
+        				((Collectible) s).updateName(0);
+        			}
         			if(c.getName() == 4)
         			{
         				this.resetPos();
@@ -162,8 +156,9 @@ public class Avatar extends Rectangle {
         				{
         					if(spr instanceof Collectible)
         					{
-        						if(((Collectible)spr).getName() == 1)
+        						if(((Collectible)spr).getName() == 0)
         						{
+        							((Collectible)spr).updateName(1);
         							spr.setFill(Color.PURPLE);
         							spr.updateValue(300);
         						}

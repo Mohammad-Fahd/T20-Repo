@@ -1,10 +1,12 @@
+package project;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
- 
+
 public class Wall extends Obstacle {
     private double avatarX, avatarY;
     private static Color color = Color.GREY;
    
+    //Constructor
     public Wall (int LocationX, int LocationY) {
         super(LocationX, LocationY, color);
     }
@@ -19,6 +21,7 @@ public class Wall extends Obstacle {
         }
     }
    
+    //Test method
     public void setCLocation(Avatar a) {
         avatarX = a.getX();
         avatarY = a.getY();

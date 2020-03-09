@@ -1,3 +1,4 @@
+package project;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
  
@@ -6,6 +7,7 @@ public class Obstruction extends Obstacle {
     private static Color color = Color.ORANGE;
     private int LR;
    
+    //Constructor(Determines size, movement direction)
     public Obstruction (int startingX, int startingY, String direction, int size) {
         super(startingX, startingY, color, direction, size);
         if (direction.equals("L")) {
@@ -47,16 +49,19 @@ public class Obstruction extends Obstacle {
             super.move(super.getDirection(), cScene);
             a.resetPos();
             a.updateHealth(a.getHealth()-1);
+            System.out.println("Hit! Lives Remaining:" + a.getHealth());
         } else {
             super.move(super.getDirection(), cScene);
         }
         resetObstruction();
     }
    
+    //Changes colour
     public void changeColor(Color newColor) {
     	super.setFill(newColor);
     }
     
+    //When obstruction reaches the end of the screen, it respawns on the other side 
     public void resetObstruction() {
         String cDirect = super.getDirection();
         if (cDirect.equals("R")) {
@@ -66,7 +71,6 @@ public class Obstruction extends Obstacle {
         } else {
             if (super.getX() < despawnX) {
                 super.setX(respawnX);
-                System.out.println("Respawned");
             }
         }
     }

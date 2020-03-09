@@ -1,3 +1,4 @@
+package project;
 import java.util.ArrayList;
  
 import java.util.Arrays;
@@ -21,21 +22,24 @@ public class AnimationApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+        	//Creation of window
             Pane root = new Pane();
             root.setPrefSize(550, 750);
             root.setStyle("-fx-background-color: lightgreen");
             Avatar avatar = new Avatar();
             createObstacles();
+            createEnds();
             Collectible collectible = new Collectible(250,200,300,1);
             objects.add(collectible);
-            //root.getChildren().add(collectible);
-            for (Sprite i: objects) {
+            for (Sprite i: objects) 
+            {
                 root.getChildren().add(i);
             }
             root.getChildren().add(avatar);
             Scene scene = new Scene(root,550,750);
             avatar.setMovement(scene);
            
+            //Timeline that moves non-player characters and detects collisions
             Timeline timeline1 = new Timeline(
                     new KeyFrame(Duration.millis(17),
                            new EventHandler <ActionEvent>()
@@ -48,7 +52,6 @@ public class AnimationApp extends Application {
                                     i.Interaction(avatar, scene);
                                 }
                                 avatar.checkGame(root);
-                                //avatar.updatePos();
                             }
                            }
                     )
@@ -67,16 +70,11 @@ public class AnimationApp extends Application {
         }
     }
    
-    private int CurrentX = 5;
-    private int CurrentY = 14;
-    //private ArrayList<Collectible> collectibles = new ArrayList<Collectible>();
-    //private ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
-    //private int[][] board = new int[15][10];
-    private boolean frogObtained = false;
    
     public AnimationApp() {
     }
    
+    //Used to have objects with adjacent Y values alternate direction of movement
     private boolean switchLR(boolean LR) {
         if (LR) {
             return(false);
@@ -85,18 +83,7 @@ public class AnimationApp extends Application {
         }
     }
    
-    //Prints out board as it is
-    private void printCurrentState()
-    {
-       
-    }
-   
-    /*
-    private int[][] processAvatarMove(String movement) {
-       
-       
-    }
-    */
+    //initializes Obstructions,Logs,Walls
    private void createObstacles() {
        boolean LeftRight = true;
        String Left = "L";
@@ -159,25 +146,16 @@ public class AnimationApp extends Application {
        }
    }
    
-    /*
-    private int[][] processObstacleMove() {
-       
-    }
-    */
+
+   //Creates the end goals
+   public void createEnds()
+   {
+	   for(int ix = 50; ix < boardX+50; ix += 100)
+	   {
+	       objects.add(new Collectible(ix,50,600,4));
+	   }
+   }
    
-    //Should become private now that only 'start' is running.
-    private void initialize() {
-        //Scanner keyboard = new Scanner(System.in);
-        String uInput = "";
-       
-        //System.out.println("CURRENT SCORE: " + avatar.getScore());
-        //System.out.print("Please enter a direction(U,D,L,R): ");
-        //uInput = keyboard.nextLine();
-       
-        //this.board = processObstacleMove();
-        //this.board = processAvatarMove(uInput);
-        printCurrentState();
-    }
    
     //Not final main
     public static void main(String[] args) {
