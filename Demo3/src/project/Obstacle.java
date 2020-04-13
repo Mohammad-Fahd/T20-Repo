@@ -1,4 +1,4 @@
-package project;
+
 
 import javafx.scene.Scene;
 
