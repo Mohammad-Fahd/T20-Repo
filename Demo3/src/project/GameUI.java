@@ -1,4 +1,3 @@
-package project;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
