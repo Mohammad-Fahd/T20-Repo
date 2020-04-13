@@ -1,4 +1,3 @@
-package project;
 
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
