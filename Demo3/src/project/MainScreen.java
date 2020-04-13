@@ -1,10 +1,7 @@
-
 import java.io.FileInputStream;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -18,13 +15,12 @@ public class MainScreen extends Pane {
     final int boardY = 750;
    
     //variable to create buttons and title of the main menu
-    private Button bStart = new Button("START");
     private ImageView cImage = new ImageView();
     private imageButton bIStart = new imageButton();
     private Image Title;
     private Image notClicked;
     private Image Clicked;
-    //tempcom
+   
     //Constructor
     public MainScreen() {
         try {
@@ -59,21 +55,5 @@ public class MainScreen extends Pane {
                 cStage.setScene(Game);
             }
         });
-    }
-   
-    /* Method that checks to see if Avatar has lost all lives, then resets and goes back to
-     * main menu
-     * cStage -  The stage that contains the main game and the main menu
-     * mainScreen - The scene that contains the mainScreen to switch back to
-     * a - Avatar whose lives are checked(and stats reset if out of lives)
-     */
-    public void resetGame(Stage cStage,Scene mainScreen ,Avatar a)
-    {
-        if(a.getHealth() == 0)
-        {
-            cStage.setScene(mainScreen);
-            a.updateHealth(3);
-            a.updateScore(a.getScore()*-1);
-        }
     }
 }
