@@ -7,9 +7,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-//base box that all moveables/items will build off of
+//Method that takes the positions from logic classes and translates them onto a GUI
 public class Sprite extends Rectangle
 {
+	//Instance variables
 	private double moveLen = 0.85;
 	private int scoreBoost;
 	
@@ -18,6 +19,8 @@ public class Sprite extends Rectangle
 	{
 		setX(b.getX());
 		setY(b.getY());
+		
+		//Checks to see the class of the object, and then assigns an appropriate colour
 		if(b instanceof Logs)
 		{
 			changeColor(Color.BROWN);
@@ -41,6 +44,7 @@ public class Sprite extends Rectangle
 				changeColor(Color.PURPLE);
 			}
 		}
+		//Sets width and height to be occupied
 		super.setWidth(50*b.getWidth());
 		b.setWidth(this.getWidth());
 		setHeight(50);
@@ -82,6 +86,7 @@ public class Sprite extends Rectangle
 		scoreBoost = value;
 	}
 	
+	//Checks to see if the user has lives left. If not, then shows game over on screen
 	   public void checkGame(Pane root,Avatar a) {
 	    	if (a.getHealth() == 0) {
 	    		Label GO = new Label("GAME OVER");

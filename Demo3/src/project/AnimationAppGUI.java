@@ -1,6 +1,7 @@
 package project;
+
 import java.util.ArrayList;
- 
+
 import java.util.Arrays;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -25,10 +26,12 @@ public class AnimationAppGUI extends Application {
         try {
         	//Creation of window
             Pane root = new Pane();
-            root.setPrefSize(550, 750);
+            MainScreen mS = new MainScreen();
+            root.setPrefSize(boardX, boardY);
             root.setStyle("-fx-background-color: lightgreen");
             Avatar avatar = new Avatar(350,700);
             Sprite player = new Sprite(avatar);
+            GameUI userInterface = new GameUI(avatar);
             createObstacles();
             createEnds();
             Collectible collectible = new Collectible(250,200,300,1);
@@ -40,7 +43,9 @@ public class AnimationAppGUI extends Application {
                 root.getChildren().add(i);
             }
             root.getChildren().add(player);
+            userInterface.establishLabels(root);
             Scene scene = new Scene(root,550,750);
+            Scene mScene = new Scene(mS,550,750);
             avatar.setMovement(scene);
             objects.add(avatar);
             visual.add(player);
@@ -53,7 +58,8 @@ public class AnimationAppGUI extends Application {
                             @Override
                             public void handle(ActionEvent event)
                             {
-                                for (Box i : objects) {
+                                mS.Interaction(primaryStage, scene);
+                            	for (Box i : objects) {
                                     i.Interaction(avatar);
                                 }
                                 if(avatar.getX() == 350 && avatar.getY() == 700)
@@ -69,7 +75,8 @@ public class AnimationAppGUI extends Application {
                                 	visual.get(i).changeColor(((Collectible)objects.get(i)).getColor());
                                 	}
                                 }
-                                player.checkGame(root,avatar);
+                                userInterface.updateLabels();
+                                mS.resetGame(primaryStage, mScene, avatar);
                             }
                            }
                     )
@@ -80,7 +87,7 @@ public class AnimationAppGUI extends Application {
             timeline1.play();
             //x = 550px, y = 750px
             //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-            primaryStage.setScene(scene);
+            primaryStage.setScene(mScene);
             primaryStage.setTitle("Frogger");
             primaryStage.show();
         } catch(Exception e) {

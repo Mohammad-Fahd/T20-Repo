@@ -39,6 +39,7 @@ public class Obstruction extends Obstacle {
     
     /*
      * Move alongside log while within bounds.
+     * a - The avatar whose position is checked and moved
      */
     
     @Override
@@ -47,7 +48,6 @@ public class Obstruction extends Obstacle {
             super.move(super.getDirection());
             a.resetPos();
             a.updateHealth(a.getHealth()-1);
-            System.out.println("Hit! Lives Remaining:" + a.getHealth());
         } else {
             super.move(super.getDirection());
         }

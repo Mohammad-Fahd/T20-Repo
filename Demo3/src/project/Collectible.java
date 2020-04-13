@@ -4,6 +4,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 public class Collectible extends Box 
 {
+	//Instance variables
 	private int name;
 	private int scoreBoost, xCood, yCood;
 	private int speed = 50;
@@ -97,16 +98,27 @@ public class Collectible extends Box
 		return color;
 	}
 	
+	/* Method that resets the positions, states, and values of colelctibles
+	 * b - ArrayList provided that is searched through for collectibles to reset
+	 * 
+	 */
 	public void resetCollectible(ArrayList<Box> b)
 	{
 		for(Box c: b)
 		{
+			// If box is also an instance of collectible class
 			if(c instanceof Collectible)
 			{
+				// If collectible is "deactivated" (Transparent w/ no point value)
 				if(((Collectible)c).getName() == 0)
 				{
+					//Update name to 1 (to be considered "active")
 					((Collectible)c).updateName(1);
+					
+					//Update points given to 300 (original value)
 					((Collectible)c).updateValue(300);
+					
+					//Update color of collectible to Purple(original value)
 					((Collectible)c).setColor(Color.PURPLE);
 				}
 			}

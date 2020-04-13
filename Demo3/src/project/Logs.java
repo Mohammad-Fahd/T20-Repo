@@ -22,8 +22,8 @@ public class Logs extends Obstacle {
         }
     }
    
-    /*
-     * Move alongside log while within bounds.
+    /* Move alongside log while within bounds.
+     * a - The avatar to influence
      */
     @Override
     public void Interaction(Avatar a) {
@@ -54,6 +54,7 @@ public class Logs extends Obstacle {
         }
     }
     
+    // Method that returns the LR instance variable, which determines the direction the log should move in
     public int getLR()
     {
     	return LR;
