@@ -1,7 +1,4 @@
-
 import java.util.ArrayList;
-
-import java.util.Arrays;
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
  
@@ -23,9 +19,10 @@ public class AnimationAppGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-        	//Creation of window
+            //Creation of window
             Pane root = new Pane();
             MainScreen mS = new MainScreen();
+            GOPopup GameOver = new GOPopup();
             root.setPrefSize(boardX, boardY);
             root.setStyle("-fx-background-color: lightgreen");
             Avatar avatar = new Avatar(350,700);
@@ -37,7 +34,7 @@ public class AnimationAppGUI extends Application {
             Sprite pickup = new Sprite(collectible);
             objects.add(collectible);
             visual.add(pickup);
-            for (Sprite i: visual) 
+            for (Sprite i: visual)
             {
                 root.getChildren().add(i);
             }
@@ -45,6 +42,8 @@ public class AnimationAppGUI extends Application {
             userInterface.establishLabels(root);
             Scene scene = new Scene(root,550,750);
             Scene mScene = new Scene(mS,550,750);
+            Scene GOScreen = new Scene(GameOver, 550, 750);
+            mScene.getStylesheets().addAll(this.getClass().getResource("mSStyle.css").toExternalForm());
             avatar.setMovement(scene);
             objects.add(avatar);
             visual.add(player);
@@ -58,24 +57,27 @@ public class AnimationAppGUI extends Application {
                             public void handle(ActionEvent event)
                             {
                                 mS.Interaction(primaryStage, scene);
-                            	for (Box i : objects) {
+                                for (Box i : objects) {
                                     i.Interaction(avatar);
                                 }
                                 if(avatar.getX() == 350 && avatar.getY() == 700)
                                 {
-                                	collectible.resetCollectible(objects);
+                                    collectible.resetCollectible(objects);
                                 }
                                 for(int i = 0;i < visual.size(); i++)
                                 {
-                                	visual.get(i).setX(objects.get(i).getX());
-                                	visual.get(i).setY(objects.get(i).getY());
-                                	if(objects.get(i) instanceof Collectible)
-                                	{
-                                	visual.get(i).changeColor(((Collectible)objects.get(i)).getColor());
-                                	}
+                                    visual.get(i).setX(objects.get(i).getX());
+                                    visual.get(i).setY(objects.get(i).getY());
+                                    if(objects.get(i) instanceof Collectible)
+                                    {
+                                    visual.get(i).changeColor(((Collectible)objects.get(i)).getColor());
+                                    }
                                 }
                                 userInterface.updateLabels();
-                                mS.resetGame(primaryStage, mScene, avatar);
+                                if(avatar.getHealth() == 0) {
+                                    primaryStage.setScene(GOScreen);
+                                    GameOver.Interaction(primaryStage, mScene, scene, avatar);
+                                }
                             }
                            }
                     )
@@ -121,18 +123,18 @@ public class AnimationAppGUI extends Application {
        for(int i = 0; i < boardY+50; i += 50) {
            if (i >= 0 && i <= 50) {
                for(int ix = 0; ix < boardX+50; ix += 50) {
-                   if (i == 0) 
+                   if (i == 0)
                    {
-                	   Wall w = new Wall(ix,i);
-                	   Sprite s = new Sprite(w);
+                       Wall w = new Wall(ix,i);
+                       Sprite s = new Sprite(w);
                        objects.add(w);
-                	   visual.add(s);
+                       visual.add(s);
                    } else {
-                	   Wall w = new Wall(ix,i);
-                	   ix += 50;
-                	   Sprite s = new Sprite(w);
+                       Wall w = new Wall(ix,i);
+                       ix += 50;
+                       Sprite s = new Sprite(w);
                        objects.add(w);
-                	   visual.add(s);
+                       visual.add(s);
                    }
                }
                
@@ -140,30 +142,30 @@ public class AnimationAppGUI extends Application {
            if (i > 50 && i < 350) {
                for(int ix = 0; ix < boardX+150; ix += 50) {
                    if (ix == 0 || ix == 250 || ix == 500) {
-                       if (LeftRight) 
+                       if (LeftRight)
                        {
-                    	   Logs l = new Logs(ix,i,Left);
-                    	   Sprite s = new Sprite(l);
+                           Logs l = new Logs(ix,i,Left);
+                           Sprite s = new Sprite(l);
                            objects.add(l);
                            visual.add(s);
                        } else {
-                    	   Logs l = new Logs(ix,i,Right);
-                    	   Sprite s = new Sprite(l);
+                           Logs l = new Logs(ix,i,Right);
+                           Sprite s = new Sprite(l);
                            objects.add(l);
                            visual.add(s);
                        }
                     }
                    if (ix == 150 || ix == 400 || ix == 650) {
-                	   if (LeftRight) {
-                		   Obstruction a = new Obstruction(ix, i, Left, 2);
-                		   Sprite s = new Sprite(a);
-                		   s.changeColor(Color.BLUE);
+                       if (LeftRight) {
+                           Obstruction a = new Obstruction(ix, i, Left, 2);
+                           Sprite s = new Sprite(a);
+                           s.changeColor(Color.BLUE);
                            objects.add(a);
                            visual.add(s);
                        } else {
-                    	   Obstruction a = new Obstruction(ix, i, Right, 2);
-                    	   Sprite s = new Sprite(a);
-                		   s.changeColor(Color.BLUE);
+                           Obstruction a = new Obstruction(ix, i, Right, 2);
+                           Sprite s = new Sprite(a);
+                           s.changeColor(Color.BLUE);
                            objects.add(a);
                            visual.add(s);
                        }
@@ -174,40 +176,40 @@ public class AnimationAppGUI extends Application {
            }
          //0, 200, 400 R400
            if (i > 350 && i < 650) {
-        	   for(int ix = 0; ix < boardX+50; ix += 50) {
-        		   if (ix == 0 || ix == 200 || ix == 400 ) {
-        			   if (LeftRight) {
-                		   Obstruction a = new Obstruction(ix, i, Left, 2);
-                		   Sprite s = new Sprite(a);
-                		   s.changeColor(Color.ORANGE);
+               for(int ix = 0; ix < boardX+50; ix += 50) {
+                   if (ix == 0 || ix == 200 || ix == 400 ) {
+                       if (LeftRight) {
+                           Obstruction a = new Obstruction(ix, i, Left, 2);
+                           Sprite s = new Sprite(a);
+                           s.changeColor(Color.ORANGE);
                            objects.add(a);
                            visual.add(s);
                        } else {
-                    	   Obstruction a = new Obstruction(ix, i, Right, 2);
-                    	   Sprite s = new Sprite(a);
-                		   s.changeColor(Color.ORANGE);
+                           Obstruction a = new Obstruction(ix, i, Right, 2);
+                           Sprite s = new Sprite(a);
+                           s.changeColor(Color.ORANGE);
                            objects.add(a);
                            visual.add(s);
                        }
-        		   }
-        	   }  
-        	   LeftRight = switchLR(LeftRight);
+                   }
+               }  
+               LeftRight = switchLR(LeftRight);
            }
        }
    }
    
-
+ 
    //Creates the end goals
    public void createEnds()
    {
-	   for(int ix = 50; ix < boardX+50; ix += 100)
-	   {
-		   Collectible endpoint = new Collectible(ix,50,600,4);
-		   Sprite s = new Sprite(endpoint);
-	       objects.add(endpoint);
-	       visual.add(s);
-	       
-	   }
+       for(int ix = 50; ix < boardX+50; ix += 100)
+       {
+           Collectible endpoint = new Collectible(ix,50,600,4);
+           Sprite s = new Sprite(endpoint);
+           objects.add(endpoint);
+           visual.add(s);
+           
+       }
    }
    
    
