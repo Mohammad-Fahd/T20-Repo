@@ -24,11 +24,11 @@ public class GOPopup extends Pane {
    
     public GOPopup() {
         try {
-            GOTitle = new Image(new FileInputStream("C:\\Users\\Ec_71\\Desktop\\GOText.png"));
-            contBNC = new Image(new FileInputStream("C:\\Users\\Ec_71\\Desktop\\contBnotClicked.png"));
-            contBC = new Image(new FileInputStream("C:\\Users\\Ec_71\\Desktop\\contBClicked.png"));
-            mSBNC = new Image(new FileInputStream("C:\\Users\\Ec_71\\Desktop\\mSBnotClicked.png"));
-            mSBC = new Image(new FileInputStream("C:\\Users\\Ec_71\\Desktop\\mSBClicked.png"));
+            GOTitle = new Image(new FileInputStream("images\GOText.png"));
+            contBNC = new Image(new FileInputStream("images\contBnotClicked.png"));
+            contBC = new Image(new FileInputStream("images\contBClicked.png"));
+            mSBNC = new Image(new FileInputStream("images\mSBnotClicked.png"));
+            mSBC = new Image(new FileInputStream("images\mSBClicked.png"));
         } catch (Exception e) {
             System.out.println("ERROR: PATH NOT FOUND");
         }
