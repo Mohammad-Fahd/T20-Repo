@@ -24,18 +24,24 @@ public class MainScreen extends Pane {
     //Constructor
     public MainScreen() {
         try {
+         //Attaches images to image variable
             Title = new Image(new FileInputStream("images/froggerLogo.png"));
             notClicked = new Image(new FileInputStream("images/buttonNClicked.png"));
             Clicked = new Image(new FileInputStream("images/buttonClicked.png"));
+         //Throws exception when file not found ("images" file must be in correct location relative to mainScreen and AnimationAppGUI)
         } catch (Exception e) {
             System.out.println("ERROR: Invalid File Path");
         }
+     //Sets colour of background
         setStyle("-fx-background-color: darkgreen");
+     //Sets window size
         setPrefSize(boardX, boardY);
+     //attaches image variables to start button, sets size of button
         bIStart.updateImages(Clicked, notClicked);
         bIStart.layoutXProperty().bind(widthProperty().subtract(bIStart.widthProperty()).divide(2));
         bIStart.layoutYProperty().bind(heightProperty().subtract(bIStart.heightProperty()).divide(2));
        
+     //Adds buttons to Pane object, attaches image to title and sets size
         getChildren().add(bIStart);
         cImage.setImage(Title);
         cImage.setFitHeight(100);
