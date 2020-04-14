@@ -43,7 +43,6 @@ public class AnimationAppGUI extends Application {
             Scene scene = new Scene(root,550,750);
             Scene mScene = new Scene(mS,550,750);
             Scene GOScreen = new Scene(GameOver, 550, 750);
-            mScene.getStylesheets().addAll(this.getClass().getResource("mSStyle.css").toExternalForm());
             avatar.setMovement(scene);
             objects.add(avatar);
             visual.add(player);
