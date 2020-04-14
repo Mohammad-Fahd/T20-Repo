@@ -66,7 +66,11 @@ public class GOPopup extends Pane {
        
     }
    
- //Activates when player is dead (has 0 lives) to show game over screen. Then handles button presses
+ /* Activates when player is dead (has 0 lives) to show game over screen. Then handles button presses
+  * cStage - the stage that contains game over, main screen, and the main game
+  * mainScreen - the scene containing the main menu
+  * a - The avatar whose stats get reset when Interaction is triggered
+  */
     public void Interaction(Stage cStage, Scene mainScreen, Scene Game, Avatar a) {
         Continue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
