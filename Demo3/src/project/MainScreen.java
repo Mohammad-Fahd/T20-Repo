@@ -24,9 +24,9 @@ public class MainScreen extends Pane {
     //Constructor
     public MainScreen() {
         try {
-            Title = new Image(new FileInputStream("C:\\Users\\Ec_71\\Desktop\\froggerLogo.png"));
-            notClicked = new Image(new FileInputStream("C:\\Users\\Ec_71\\Desktop\\buttonNClicked.png"));
-            Clicked = new Image(new FileInputStream("C:\\Users\\Ec_71\\Desktop\\buttonClicked.png"));
+            Title = new Image(new FileInputStream("images\froggerLogo.png"));
+            notClicked = new Image(new FileInputStream("images\buttonNClicked.png"));
+            Clicked = new Image(new FileInputStream("images\buttonClicked.png"));
         } catch (Exception e) {
             System.out.println("ERROR: Invalid File Path");
         }
